@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/joy": "^5.0.0-beta.14",
+    "@mui/material": "^5.14.18",
     "immer": "^10.0.3",
     "next": "14.0.1",
     "react": "^18",

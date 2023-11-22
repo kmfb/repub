@@ -4,10 +4,10 @@ import { AuthType, createClient } from "webdav";
 export const dynamic = 'force-dynamic' // defaults to force-static
 
 export async function GET(request: Request) {
-    const client = createClient(`http://192.168.31.223:80`, {
-        authType: AuthType.Digest,
-        username: 'kmfb',
-        password: 'qazwsxedc123',
+    const client = createClient(`http://www.stardusted.top:31580`, {
+      authType: AuthType.Password,
+      username: "kmfb",
+      password: "1q2w3e*",
     });
     const getDirectoryItems = async () => {
         const directoryItems = await client.getDirectoryContents("/");
