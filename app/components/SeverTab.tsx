@@ -1,14 +1,11 @@
 "use client";
 import { Tab } from "@mui/joy";
 import React from "react";
-import { ServerConfig } from "../store/useServerViewerStore";
+import { IServerFormData } from "../interface";
+import { getSeverId } from "../utils";
 
-function SeverTab({ server }: { server: ServerConfig }) {
-  return (
-    <Tab key={server.url} value={server.url}>
-      {server.url}
-    </Tab>
-  );
+function SeverTab({ server }: { server: IServerFormData }) {
+  return <Tab value={server.id}>{getSeverId(server)}</Tab>;
 }
 
 export default SeverTab;

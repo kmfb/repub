@@ -9,9 +9,11 @@ import {
   Input,
   Modal,
   ModalDialog,
+  Select,
   Stack,
   Switch,
   Typography,
+  Option,
 } from "@mui/joy";
 import React from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
@@ -20,6 +22,8 @@ import useAddServerModal from "../store/useAddServerModal";
 import useServerViewerStore from "../store/useServerViewerStore";
 import { IServerFormData } from "../interface";
 import { isHttps } from "../utils";
+import { v4 as uuidv4 } from 'uuid';
+
 
 function ConnectModal() {
   const { open, setOpen } = useAddServerModal();
@@ -29,106 +33,119 @@ function ConnectModal() {
       defaultValues: {
         authType: AuthType.Password,
         protocol: "http",
-        host: "",
         port: 80,
-        username: "",
-        password: "",
       },
     });
 
   const onSubmit = (data: IServerFormData) => {
-    console.log(data);
-    // const client = createClient(`https://${data.url}:80`, {
-    //   authType: AuthType.Digest,
-    //   username: data.username,
-    //   password: data.password,
-    // });
-    // const getDirectoryItems = async () => {
-    //   const directoryItems = await client.getDirectoryContents("/");
-    //   console.log(directoryItems, "directoryItems");
-    // };
-    // const dItems = getDirectoryItems();
-    // console.log(dItems, "dItems");
     addServerConfig({
-      url: data.url,
-      username: data.username,
-      password: data.password,
+      id: uuidv4(),
+      ...data,
     });
     setOpen(false);
   };
 
-  // const client = createClient("https://dav.jianguoyun.com/dav/", {
-  //   authType: AuthType.Password,
-  //   username: "zhaotianxion@qq.com",
-  //   password: "accgityf8g8r8juf",
-  // });
-  // const getDirectoryItems = async () => {
-  //   const directoryItems = await client.getDirectoryContents("/");
-  //   console.log(directoryItems, "directoryItems");
-  // };
-  // const dItems = getDirectoryItems();
-  // console.log(dItems, "dItems");
   return (
     <div>
       <React.Fragment>
         <Modal open={open} onClose={() => setOpen(false)} disablePortal>
           <ModalDialog>
             <DialogTitle>服务器配置</DialogTitle>
-            {/* <DialogContent>
-              Fill in the information of the project.
-            </DialogContent> */}
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Stack spacing={2}>
-                <FormControl>
-                  <FormLabel>协议</FormLabel>
-                  <Controller
-                    control={control}
-                    name={`protocol`}
-                    render={({ field: { onChange, value } }) => (
-                      <Switch
-                        color={isHttps(value) ? "success" : "primary"}
-                        endDecorator={
-                          isHttps(value) ? (
-                            <>
-                              <LockOutlined />
-                              <>https</>
-                            </>
-                          ) : (
-                            <>
-                              <LockOpenOutlined />
-                              <>http</>
-                            </>
-                          )
-                        }
-                        checked={isHttps(value)}
-                        onChange={(e) => {
-                          debugger;
-                          onChange(e.target.checked ? "https" : "http");
-                        }}
-                      />
-                    )}
-                  />
-                  {/* <Switch
+            <DialogContent>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Stack spacing={2}>
+                  <FormControl>
+                    <FormLabel>认证类型</FormLabel>
+                    <Controller
+                      control={control}
+                      name={`authType`}
+                      rules={{
+                        required: true,
+                      }}
+                      render={({ field: { onChange, value } }) => (
+                        <Select
+                          placeholder="Choose one..."
+                          onChange={(e, value) => {
+                            onChange(value);
+                          }}
+                          value={value}
+                          slotProps={{
+                            listbox: {
+                              sx: (theme) => ({
+                                zIndex: theme.vars.zIndex.modal,
+                              }),
+                            },
+                          }}
+                        >
+                          <Option value={AuthType.Digest}>Digest</Option>
+                          <Option value={AuthType.None}>None</Option>
+                          <Option value={AuthType.Password}>Password</Option>
+                          <Option value={AuthType.Token}>Token</Option>
+                        </Select>
+                      )}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>协议</FormLabel>
+                    <Controller
+                      control={control}
+                      name={`protocol`}
+                      rules={{
+                        required: true,
+                      }}
+                      render={({ field: { onChange, value } }) => (
+                        <Switch
+                          color={isHttps(value) ? "success" : "primary"}
+                          endDecorator={
+                            isHttps(value) ? (
+                              <>
+                                <LockOutlined />
+                                <>https</>
+                              </>
+                            ) : (
+                              <>
+                                <LockOpenOutlined />
+                                <>http</>
+                              </>
+                            )
+                          }
+                          checked={isHttps(value)}
+                          onChange={(e) => {
+                            debugger;
+                            onChange(e.target.checked ? "https" : "http");
+                          }}
+                        />
+                      )}
+                    />
+                    {/* <Switch
                     color={isHttps(formValues.protocol) ? "success" : "primary"}
                     startDecorator={<LockOpenOutlined />}
                     endDecorator={<LockOutlined />}
                     {...register("protocol")}
                   /> */}
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel>Username</FormLabel>
-                  <Input required {...register("username")} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Password</FormLabel>
-                  <Input type="password" required {...register("password")} />
-                </FormControl>
-                <Button variant="outlined" color="primary" type="submit">
-                  Submit
-                </Button>
-              </Stack>
-            </form>
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Host</FormLabel>
+                    <Input required {...register("host")} />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Port</FormLabel>
+                    <Input required {...register("port")} />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Username</FormLabel>
+                    <Input required {...register("username")} />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Password</FormLabel>
+                    <Input type="password" required {...register("password")} />
+                  </FormControl>
+                  <Button variant="outlined" color="primary" type="submit">
+                    Submit
+                  </Button>
+                </Stack>
+              </form>
+            </DialogContent>
           </ModalDialog>
         </Modal>
       </React.Fragment>

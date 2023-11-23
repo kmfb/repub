@@ -4,7 +4,7 @@
 
 @layer components {
   .add-server-button-container {
-    @apply w-[200px] flex justify-center items-center;
+    @apply w-[300px] flex justify-center items-center;
   }
   .header-container {
     @apply h-[6vh] flex justify-between items-center;
