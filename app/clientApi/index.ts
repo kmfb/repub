@@ -1,6 +1,6 @@
-import axios from "axios";
 import { IServerFormData } from "../interface";
 import queryString from "query-string";
+import axios from "../lib/axios";
 
 export const getDirectoryContents = async (
   path: string,
@@ -11,5 +11,5 @@ export const getDirectoryContents = async (
     ...server,
   };
   const queryStr = queryString.stringify(query);
-  return axios.get(`/api/webdav?${queryStr}`);
+  return axios.get(`/webdav?${queryStr}`);
 };

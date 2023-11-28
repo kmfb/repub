@@ -1,4 +1,4 @@
-import { TabList, TabPanel, Tabs } from "@mui/joy";
+import { CircularProgress, TabList, TabPanel, Tabs } from "@mui/joy";
 import React from "react";
 import SeverTab from "./SeverTab";
 
@@ -6,9 +6,16 @@ import { AuthType, createClient } from "webdav";
 import { IServerFormData } from "../interface";
 import { getSeverId } from "../utils";
 import useQueryDirectoryContents from "../hook/query/useQueryDirectoryContents";
-
+import _ from "lodash";
+import FileList from "./FileList";
 function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const directoryContentsMutation = useQueryDirectoryContents();
+  console.log(directoryContentsMutation, "directoryContentsMutation");
+  const files = _.get(directoryContentsMutation, "data.data.data");
+  const clickedServer = _.get(directoryContentsMutation, "variables.server");
+  console.log(files, "directoryContents");
+  
+  
   return (
     <Tabs
       aria-label="Vertical tabs"
@@ -31,14 +38,9 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
           return <SeverTab key={server.id} server={server} />;
         })}
       </TabList>
-      <TabPanel value={0}>
-        <b>First</b> tab panel
-      </TabPanel>
-      <TabPanel value={1}>
-        <b>Second</b> tab panel
-      </TabPanel>
-      <TabPanel value={2}>
-        <b>Third</b> tab panel
+
+      <TabPanel value={clickedServer?.id}>
+        {directoryContentsMutation.isPending ? <CircularProgress /> : <FileList files={files} />}
       </TabPanel>
     </Tabs>
   );

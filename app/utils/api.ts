@@ -14,4 +14,12 @@ function withErrorHandler(fn: any) {
   };
 }
 
-export default withErrorHandler;
+function successResponse(data: any) {
+  return NextResponse.json({
+    data,
+    status: "success",
+    ts: Date.now(),
+  });
+}
+
+export { withErrorHandler, successResponse };
