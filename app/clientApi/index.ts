@@ -1,6 +1,7 @@
 import { IServerFormData } from "../interface";
 import queryString from "query-string";
 import axios from "../lib/axios";
+import { IFile } from "../components/FileList";
 
 export const getDirectoryContents = async (
   path: string,
@@ -12,4 +13,24 @@ export const getDirectoryContents = async (
   };
   const queryStr = queryString.stringify(query);
   return axios.get(`/webdav?${queryStr}`);
+};
+
+export const getFile = async (file: IFile, server: IServerFormData) => {
+  const query = {
+    path: file.filename,
+    ...server,
+  };
+  const queryStr = queryString.stringify(query);
+  return axios.get(`/book?${queryStr}`, {
+    responseType: "blob",
+  });
+};
+
+export const getFileDownloadUrl = (file: IFile, server: IServerFormData) => {
+  const query = {
+    path: file.filename,
+    ...server,
+  };
+  const queryStr = queryString.stringify(query);
+  return axios.get(`/book/download?${queryStr}`);
 };

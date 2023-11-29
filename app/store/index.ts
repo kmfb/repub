@@ -2,28 +2,24 @@
 import { SnackbarProps, SnackbarTypeMap } from "@mui/joy";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { IBook } from "../interface";
 
 interface IndexState {
-  snackbar: {
-    value: SnackbarTypeMap["props"];
-    setValue: (value: SnackbarTypeMap["props"]) => void;
-  };
+  books: Array<IBook>;
+}
+
+interface IndexActions {
+  addBook: (book: IBook) => void;
 }
 
 // Create your store
-const useIndexStore = create<IndexState>()(
+const useIndexStore = create<IndexState & IndexActions>()(
   immer((set) => ({
-    snackbar: {
-      value: {
-        open: false,
-        message: "",
-        color: "success",
-      },
-      setValue: (value) =>
-        set((state: any) => {
-          state.snackbar.value = value;
-        }),
-    },
+    books: [],
+    addBook: (book: IBook) =>
+      set((state) => {
+        state.books.push(book);
+      }),
   }))
 );
 

@@ -12,7 +12,10 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const directoryContentsMutation = useQueryDirectoryContents();
   console.log(directoryContentsMutation, "directoryContentsMutation");
   const files = _.get(directoryContentsMutation, "data.data.data");
-  const clickedServer = _.get(directoryContentsMutation, "variables.server");
+  const clickedServer: any = _.get(
+    directoryContentsMutation,
+    "variables.server"
+  );
   console.log(files, "directoryContents");
   
   
@@ -40,7 +43,11 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
       </TabList>
 
       <TabPanel value={clickedServer?.id}>
-        {directoryContentsMutation.isPending ? <CircularProgress /> : <FileList files={files} />}
+        {directoryContentsMutation.isPending ? (
+          <CircularProgress />
+        ) : (
+          <FileList files={files} server={clickedServer} />
+        )}
       </TabPanel>
     </Tabs>
   );
