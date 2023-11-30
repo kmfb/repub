@@ -15,5 +15,5 @@ export interface IBook {
   name: string;
   progress: number;
   serverId: string;
-  content: string;
+  content: Blob;
 }

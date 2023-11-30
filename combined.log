@@ -1,3 +1,4 @@
 {"level":"error","message":"{\"errorMessage\":\"Unexpected end of JSON input\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
 {"level":"error","message":"{\"errorMessage\":\"Unexpected end of JSON input\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
 {"level":"error","message":"{\"errorMessage\":\"Unexpected end of JSON input\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"buffer.toBlob is not a function\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}

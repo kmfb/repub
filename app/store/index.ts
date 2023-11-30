@@ -18,6 +18,10 @@ const useIndexStore = create<IndexState & IndexActions>()(
     books: [],
     addBook: (book: IBook) =>
       set((state) => {
+        const hasBook = state.books.find((b) => b.id === book.id);
+        if (hasBook) {
+          return;
+        }
         state.books.push(book);
       }),
   }))

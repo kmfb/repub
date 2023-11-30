@@ -24,9 +24,11 @@ export const GET = withErrorHandler(async (request: NextRequest) => {
   const client = createClient(config.url, _.omit(config, ["url"]));
 
   const buffer: any = await client.getFileContents(config.path);
-  const zip = new JSZip();
-  zip.file("file.epub", buffer); // add file buffer to zip
-  const blob = await zip.generateAsync({ type: "blob" });
+  // const zip = new JSZip();
+  // zip.file("file.epub", buffer); // add file buffer to zip
+  // const blob = await zip.generateAsync({ type: "blob" });
+  const blob = new Blob([buffer]);
+
   return new Response(blob, {
     headers: {
       "Content-Type": "application/zip",

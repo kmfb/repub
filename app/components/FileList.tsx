@@ -8,6 +8,9 @@ import { IServerFormData } from "../interface";
 import useQueryBook from "../hook/query/useQueryBook";
 
 import { useRouter } from "next/navigation";
+import { repubCache } from "../utils/cache";
+import { getBookId } from "../utils";
+import useIndexStore from "../store";
 export interface IFile {
   filename: string;
   basename: string;
@@ -35,14 +38,32 @@ const getFileIcon = (type: string) => {
 const FileList: React.FC<FileListProps> = ({ files, server }) => {
   const queryBookMutation = useQueryBook();
   const router = useRouter();
+  const { addBook } = useIndexStore();
   if (!files) return null;
 
-  const handleClickFile = (file: IFile) => {
+  const handleClickFile = async (file: IFile) => {
     if (file.type === "file") {
-      queryBookMutation.mutate({
-        file,
-        server,
+      const bookId = getBookId(file, server);
+      const cachedBookRes = await repubCache.read(bookId);
+      debugger;
+      if (!cachedBookRes) {
+        debugger;
+        queryBookMutation.mutate({
+          file,
+          server,
+        });
+        return;
+      }
+      const content = await cachedBookRes.blob();
+
+      addBook({
+        id: bookId,
+        name: file.filename,
+        progress: 0,
+        serverId: server.id as any,
+        content,
       });
+      router.push(`/viewer/${bookId}`);
     }
   };
   return (
