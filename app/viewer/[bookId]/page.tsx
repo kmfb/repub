@@ -8,18 +8,18 @@ import { Book } from "epubjs";
 import useServerViewerStore from "@/app/store/useServerViewerStore";
 import queryString from "query-string";
 import { repubCache } from "@/app/utils/cache";
+import Reader from "./components/Reader";
 
 function Page({ params }: { params: { bookId: string } }) {
-  const viewerRef = useRef(null);
-  const [book, setBook] = useState<any>(null);
-  const [toggle, setToggle] = useState(false);
+
+ 
 
   const { books } = useIndexStore();
   const cBook = books.find((book) => book.id === params.bookId);
 
   return (
     <div style={{ position: "relative", height: "100%" }}>
-      <ReactEpubViewer url={cBook?.content as any} ref={viewerRef} />
+      <Reader url={cBook?.content as any} />
     </div>
   );
 }
