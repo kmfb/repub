@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // types
 import Book from "../types/book";
-import Page from "../types/page";
+import Page from "../types/pageType";
 import Toc from "../types/toc";
 import Highlight, { Color } from "../types/highlight";
 import palette from "../lib/styles/palette";

@@ -26,7 +26,7 @@ import viewerLayout from "../lib/styles/viewerLayout";
 import { RootState } from "../slices";
 import { ViewerRef } from "../types";
 import Book, { BookStyle, BookOption } from "../types/book";
-import Page from "../types/page";
+import Page from "../types/pageType";
 import Toc from "../types/toc";
 import LoadingView from "../LoadingView";
 

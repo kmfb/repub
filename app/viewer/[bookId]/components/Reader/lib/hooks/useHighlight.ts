@@ -21,7 +21,7 @@ import viewerLayout, { contextmenuWidth } from "../../lib/styles/viewerLayout";
 // types
 import { RootState } from "../../slices";
 import { BookStyle, BookFlow } from "../../types/book";
-import Page from "../../types/page";
+import Page from "../../types/pageType";
 import Selection from "../../types/selection";
 import Highlight from "../../types/highlight";
 

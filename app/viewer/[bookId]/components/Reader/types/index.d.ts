@@ -2,9 +2,9 @@ import * as React from "react";
 import Book, { BookOptions } from "epubjs/types/book";
 import { RenditionOptions } from "epubjs/types/rendition";
 import { Contents, Rendition } from "epubjs";
-import Toc from 'types/toc'
-import Page from 'types/page'
-import ViewerLayout from 'types/viewerLayout'
+import Toc from "./types/toc";
+import Page from "./types/pageType";
+import ViewerLayout from "./types/viewerLayout";
 
 
 /**
