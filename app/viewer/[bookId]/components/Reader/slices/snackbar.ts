@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 // types
-import Snackbar from 'types/snackbar'
+import Snackbar from "../types/snackbar";
 
 
 const RefEvent: number[] = [];
