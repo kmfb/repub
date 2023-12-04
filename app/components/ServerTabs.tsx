@@ -8,17 +8,17 @@ import { getSeverId } from "../utils";
 import useQueryDirectoryContents from "../hook/query/useQueryDirectoryContents";
 import _ from "lodash";
 import FileList from "./FileList";
+import useIndexStore from "../store";
 function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const directoryContentsMutation = useQueryDirectoryContents();
   console.log(directoryContentsMutation, "directoryContentsMutation");
-  const files = _.get(directoryContentsMutation, "data.data.data");
+  const { fileLists } = useIndexStore();
+
   const clickedServer: any = _.get(
     directoryContentsMutation,
     "variables.server"
   );
-  console.log(files, "directoryContents");
-  
-  
+
   return (
     <Tabs
       aria-label="Vertical tabs"
@@ -46,7 +46,7 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
         {directoryContentsMutation.isPending ? (
           <CircularProgress />
         ) : (
-          <FileList files={files} server={clickedServer} />
+          <FileList files={fileLists} server={clickedServer} />
         )}
       </TabPanel>
     </Tabs>

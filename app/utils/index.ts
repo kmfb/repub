@@ -28,3 +28,8 @@ export const getBookId = (file: IFile, server: IServerFormData) => {
   const id = `${getSeverId(server)}${file.filename}${file.lastmod}`;
   return md5(id);
 };
+
+export const getFileNameByPath = (path: string) => {
+  const arr = path.split("/");
+  return arr[arr.length - 1];
+};

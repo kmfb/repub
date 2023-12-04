@@ -2,3 +2,12 @@
 {"level":"error","message":"{\"errorMessage\":\"Unexpected end of JSON input\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
 {"level":"error","message":"{\"errorMessage\":\"Unexpected end of JSON input\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
 {"level":"error","message":"{\"errorMessage\":\"buffer.toBlob is not a function\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 401 Unauthorized\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"request to http://www.stardusted.top:31580/ failed, reason: read ECONNRESET\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 401 Unauthorized\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"request to http://www.stardusted.top:31580/ failed, reason: read ECONNRESET\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 401 Unauthorized\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"request to http://www.stardusted.top:31580/ failed, reason: read ECONNRESET\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"request to http://localhost:31080/ failed, reason: connect ECONNREFUSED ::1:31080\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"request to http://localhost:31080/ failed, reason: connect ECONNREFUSED ::1:31080\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}

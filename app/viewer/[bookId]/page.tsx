@@ -11,15 +11,12 @@ import { repubCache } from "@/app/utils/cache";
 import Reader from "./components/Reader";
 
 function Page({ params }: { params: { bookId: string } }) {
-
- 
-
   const { books } = useIndexStore();
-  const cBook = books.find((book) => book.id === params.bookId);
+  const cBook: any = books.find((book) => book.id === params.bookId);
 
   return (
     <div style={{ position: "relative", height: "100%" }}>
-      <Reader url={cBook?.content as any} />
+      <Reader book={cBook} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Provider } from "react-redux";
 import { ReactEpubViewer } from "react-epub-viewer";
@@ -29,8 +29,10 @@ import Book, { BookStyle, BookOption } from "../types/book";
 import Page from "../types/pageType";
 import Toc from "../types/toc";
 import LoadingView from "../LoadingView";
+import { IBook } from "@/app/interface";
+import _ from "lodash";
 
-const Reader = ({ url, loadingView }: Props) => {
+const Reader = ({ book: serverBook, loadingView }: Props) => {
   const dispatch = useDispatch();
   const currentLocation = useSelector<RootState, Page>(
     (state) => state.book.currentLocation
@@ -119,7 +121,9 @@ const Reader = ({ url, loadingView }: Props) => {
    * Change current page
    * @param page Epub page
    */
-  const onPageChange = (page: Page) => dispatch(updateCurrentPage(page));
+  const onPageChange = (page: Page) => {
+    return dispatch(updateCurrentPage(page));
+  };
 
   /**
    * ContextMenu on
@@ -133,6 +137,22 @@ const Reader = ({ url, loadingView }: Props) => {
   /** ContextMenu off */
   const onContextmMenuRemove = () => setIsContextMenu(false);
 
+  useEffect(() => {
+    const syncPage = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+      if (!viewerRef.current) {
+        return () => {};
+      }
+      console.log("serverBook.location", serverBook.location);
+      viewerRef.current?.setLocation &&
+        viewerRef.current?.setLocation(serverBook.location);
+    };
+    syncPage();
+
+    console.log("viewerRef.current", viewerRef.current?.setLocation);
+  }, []);
+  console.log(currentLocation, "im currentLocation");
+
   return (
     <>
       <ViewerWrapper>
@@ -143,7 +163,7 @@ const Reader = ({ url, loadingView }: Props) => {
         />
 
         <ReactEpubViewer
-          url={url}
+          url={serverBook?.content as any}
           viewerLayout={viewerLayout}
           viewerStyle={bookStyle}
           viewerOption={bookOption}
@@ -206,16 +226,16 @@ const Reader = ({ url, loadingView }: Props) => {
   );
 };
 
-const ReaderWrapper = ({ url, loadingView }: Props) => {
+const ReaderWrapper = ({ book, loadingView }: Props) => {
   return (
     <Provider store={store}>
-      <Reader url={url} loadingView={loadingView} />
+      <Reader book={book} loadingView={loadingView} />
     </Provider>
   );
 };
 
 interface Props {
-  url: string;
+  book: IBook;
   loadingView?: React.ReactNode;
 }
 

@@ -5,6 +5,8 @@ import ConnectModal from "./components/ConnectModal";
 import ServerViewer from "./components/ServerViewer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useIndexStore from "./store";
+import { useEffect } from "react";
 
 export default function Home() {
   return (

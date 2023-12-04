@@ -1,15 +1,21 @@
 "use client";
 import { Add, Person, PlusOne } from "@mui/icons-material";
 import { Box, Button, Sheet, Tab, TabList, TabPanel, Tabs } from "@mui/joy";
-import React from "react";
+import React, { useEffect } from "react";
 import useAddServerModal from "../store/useAddServerModal";
 import useServerViewerStore from "../store/useServerViewerStore";
 import SeverTab from "./SeverTab";
 import ServerTabs from "./ServerTabs";
+import useIndexStore from "../store";
 
 function TabsForSelectServer() {
   const { open, setOpen } = useAddServerModal();
   const { servers } = useServerViewerStore();
+  const { books } = useIndexStore();
+
+  useEffect(() => {
+    console.log("sync server", books);
+  }, [books]);
   return (
     <div>
       <Sheet>

@@ -23,7 +23,7 @@ const initialBook: Book = {
 };
 
 /** 초기 CurrentPage 상태 */
-const initialCurrentLocation: Page = {
+export const initialCurrentLocation: Page = {
   chapterName: "-",
   currentPage: 0,
   totalPage: 0,
