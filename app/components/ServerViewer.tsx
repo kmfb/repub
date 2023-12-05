@@ -11,11 +11,7 @@ import useIndexStore from "../store";
 function TabsForSelectServer() {
   const { open, setOpen } = useAddServerModal();
   const { servers } = useServerViewerStore();
-  const { books } = useIndexStore();
 
-  useEffect(() => {
-    console.log("sync server", books);
-  }, [books]);
   return (
     <div>
       <Sheet>

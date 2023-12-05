@@ -9,14 +9,16 @@ import useServerViewerStore from "@/app/store/useServerViewerStore";
 import queryString from "query-string";
 import { repubCache } from "@/app/utils/cache";
 import Reader from "./components/Reader";
+import useBooksContent from "@/app/store/useBooksContent";
 
 function Page({ params }: { params: { bookId: string } }) {
-  const { books } = useIndexStore();
+  const { books } = useBooksContent();
+  const { books: booksPagination } = useIndexStore();
   const cBook: any = books.find((book) => book.id === params.bookId);
-
+  const pBook: any = booksPagination.find((book) => book.id === params.bookId);
   return (
     <div style={{ position: "relative", height: "100%" }}>
-      <Reader book={cBook} />
+      <Reader book={cBook} bookPagination={pBook} />
     </div>
   );
 }

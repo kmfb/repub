@@ -2,6 +2,7 @@ import { IServerQueryObj } from "../api/webdav/route";
 import { IFile } from "../components/FileList";
 import { IServerFormData } from "../interface";
 import queryString from "query-string";
+import { WebDAVClient } from "webdav";
 const md5 = require("md5");
 export const isHttps = (protocol: string) => {
   return protocol === "https";
@@ -33,3 +34,25 @@ export const getFileNameByPath = (path: string) => {
   const arr = path.split("/");
   return arr[arr.length - 1];
 };
+
+export async function uploadJsonToWebdav(
+  obj: object,
+  filename: string,
+  webdavClient: WebDAVClient
+): Promise<void> {
+  const json = JSON.stringify(obj);
+
+  const file = new Blob([json], { type: "application/json" });
+
+  const fileUrl = URL.createObjectURL(file);
+
+  try {
+    await webdavClient.putFileContents(fileUrl, `/files/${filename}`);
+
+    console.log("Upload successful!");
+  } catch (error) {
+    console.error("Upload failed", error);
+  } finally {
+    URL.revokeObjectURL(fileUrl);
+  }
+}

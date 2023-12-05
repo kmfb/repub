@@ -13,6 +13,7 @@ import { getBookId, getFileNameByPath } from "../utils";
 import useIndexStore from "../store";
 import useQueryDirectoryContents from "../hook/query/useQueryDirectoryContents";
 import { initialCurrentLocation } from "../viewer/[bookId]/components/Reader/slices/book";
+import useBooksContent from "../store/useBooksContent";
 export interface IFile {
   filename: string;
   basename: string;
@@ -41,45 +42,40 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
   const queryBookMutation = useQueryBook();
   const directoryContentsMutation = useQueryDirectoryContents();
   const router = useRouter();
-  const { addBook, currentPath } = useIndexStore();
+  const { currentPath } = useIndexStore();
+  const { addBook } = useBooksContent();
   console.log(currentPath, "currentPath");
   const { books } = useIndexStore();
   const handleClickFile = async (file: IFile) => {
-    if (file.type === "file") {
-      const bookId = getBookId(file, server);
-      const cachedBookRes = await repubCache.read(bookId);
-      debugger;
-      if (!cachedBookRes) {
-        debugger;
-        queryBookMutation.mutate({
-          file,
-          server,
-        });
-        return;
-      }
-      const content = await cachedBookRes.blob();
-
-      addBook({
-        id: bookId,
-        name: file.filename,
-        location: {
-          chapterName: "Introduction",
-          currentPage: 164,
-          totalPage: 627,
-          startCfi: "epubcfi(/6/12!/4/2[introduction_1]/20/1:231)",
-          endCfi: "epubcfi(/6/12!/4/2[introduction_1]/26/1:237)",
-          base: "/6/12",
-        },
-        serverId: server.id as any,
-        content,
-      });
-      router.push(`/viewer/${bookId}`);
-    } else {
+    if (file.type === "directory") {
       directoryContentsMutation.mutate({
         path: file.filename,
         server,
       });
+      return;
     }
+
+    const bookId = getBookId(file, server);
+    const cachedBookRes = await repubCache.read(bookId);
+    debugger;
+    if (!cachedBookRes) {
+      debugger;
+      queryBookMutation.mutate({
+        file,
+        server,
+      });
+      return;
+    }
+    const content = await cachedBookRes.blob();
+
+    addBook({
+      id: bookId,
+      name: file.filename,
+      location: initialCurrentLocation,
+      serverId: server.id as any,
+      content,
+    });
+    router.push(`/viewer/${bookId}`);
   };
   useEffect(() => {
     console.log("sync server", books);

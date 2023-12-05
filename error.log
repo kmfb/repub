@@ -11,3 +11,30 @@
 {"level":"error","message":"{\"errorMessage\":\"request to http://localhost:31080/ failed, reason: connect ECONNREFUSED ::1:31080\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
 {"level":"error","message":"{\"errorMessage\":\"request to http://localhost:31080/ failed, reason: connect ECONNREFUSED ::1:31080\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
 {"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"request to http://localhost:31080/ failed, reason: connect ECONNREFUSED ::1:31080\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"request to http://localhost:31080/ failed, reason: connect ECONNREFUSED ::1:31080\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 403 Forbidden\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"request to https://dav.jianguoyun.com:80/ failed, reason: write EPROTO 404185E201000000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:355:\\n\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 401 Unauthorized\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}

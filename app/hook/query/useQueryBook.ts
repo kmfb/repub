@@ -2,15 +2,17 @@ import { getDirectoryContents, getFile } from "@/app/clientApi";
 import { IFile } from "@/app/components/FileList";
 import { IServerFormData } from "@/app/interface";
 import useIndexStore from "@/app/store";
+import useBooksContent from "@/app/store/useBooksContent";
 import { getBookId } from "@/app/utils";
 import { repubCache } from "@/app/utils/cache";
+import { initialCurrentLocation } from "@/app/viewer/[bookId]/components/Reader/slices/book";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 
 function useQueryBook() {
-  const { addBook } = useIndexStore();
+  const { addBook } = useBooksContent();
   const router = useRouter();
 
   const query = useMutation({
@@ -29,7 +31,7 @@ function useQueryBook() {
       addBook({
         id: bookId,
         name: variables.file.filename,
-        progress: 0,
+        location: initialCurrentLocation,
         serverId: variables.server.id as any,
         content: res.data,
       });

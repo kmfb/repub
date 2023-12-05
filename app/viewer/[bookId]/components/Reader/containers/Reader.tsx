@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Provider } from "react-redux";
-import { ReactEpubViewer } from "react-epub-viewer";
+import ReactEpubViewer from "@/app/modules/reactViewer/ReactViewer";
 // containers
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
@@ -31,9 +31,15 @@ import Toc from "../types/toc";
 import LoadingView from "../LoadingView";
 import { IBook } from "@/app/interface";
 import _ from "lodash";
+import { useParams } from "next/navigation";
+import useIndexStore from "@/app/store";
+import useBooksContent from "@/app/store/useBooksContent";
 
-const Reader = ({ book: serverBook, loadingView }: Props) => {
+const Reader = ({ book: serverBook, bookPagination, loadingView }: Props) => {
   const dispatch = useDispatch();
+  const params = useParams();
+  const { books, setBooks } = useIndexStore();
+
   const currentLocation = useSelector<RootState, Page>(
     (state) => state.book.currentLocation
   );
@@ -121,7 +127,15 @@ const Reader = ({ book: serverBook, loadingView }: Props) => {
    * Change current page
    * @param page Epub page
    */
-  const onPageChange = (page: Page) => {
+  const onPageChange = (page: Page, isLoaded: boolean) => {
+    debugger;
+    console.log(isLoaded, "im isLoadedis");
+    // updateSeverBooks(page);
+    if (!isLoaded) {
+      return;
+    }
+
+    updateSeverBooks(page);
     return dispatch(updateCurrentPage(page));
   };
 
@@ -137,22 +151,22 @@ const Reader = ({ book: serverBook, loadingView }: Props) => {
   /** ContextMenu off */
   const onContextmMenuRemove = () => setIsContextMenu(false);
 
-  useEffect(() => {
-    const syncPage = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
-      if (!viewerRef.current) {
-        return () => {};
-      }
-      console.log("serverBook.location", serverBook.location);
-      viewerRef.current?.setLocation &&
-        viewerRef.current?.setLocation(serverBook.location);
-    };
-    syncPage();
-
-    console.log("viewerRef.current", viewerRef.current?.setLocation);
-  }, []);
   console.log(currentLocation, "im currentLocation");
 
+  const updateSeverBooks = (location: any) => {
+    debugger;
+    setBooks(
+      books.map((book) => {
+        if (book.id === params.bookId) {
+          return {
+            ...book,
+            location,
+          };
+        }
+        return book;
+      })
+    );
+  };
   return (
     <>
       <ViewerWrapper>
@@ -173,6 +187,7 @@ const Reader = ({ book: serverBook, loadingView }: Props) => {
           onSelection={onContextMenu}
           loadingView={loadingView || <LoadingView />}
           ref={viewerRef}
+          location={bookPagination?.location}
         />
 
         <Footer
@@ -226,16 +241,21 @@ const Reader = ({ book: serverBook, loadingView }: Props) => {
   );
 };
 
-const ReaderWrapper = ({ book, loadingView }: Props) => {
+const ReaderWrapper = ({ book, bookPagination, loadingView }: Props) => {
   return (
     <Provider store={store}>
-      <Reader book={book} loadingView={loadingView} />
+      <Reader
+        book={book}
+        bookPagination={bookPagination}
+        loadingView={loadingView}
+      />
     </Provider>
   );
 };
 
 interface Props {
   book: IBook;
+  bookPagination: IBook;
   loadingView?: React.ReactNode;
 }
 

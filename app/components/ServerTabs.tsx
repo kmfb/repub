@@ -12,23 +12,33 @@ import useIndexStore from "../store";
 function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const directoryContentsMutation = useQueryDirectoryContents();
   console.log(directoryContentsMutation, "directoryContentsMutation");
-  const { fileLists } = useIndexStore();
+  const { fileLists, setCurrentServer, currentServer } = useIndexStore();
 
-  const clickedServer: any = _.get(
-    directoryContentsMutation,
-    "variables.server"
-  );
+  // const clickedServer: any = _.get(
+  //   directoryContentsMutation,
+  //   "variables.server"
+  // );
+
+  console.log(currentServer, "im current");
 
   return (
     <Tabs
       aria-label="Vertical tabs"
       orientation="vertical"
+      value={currentServer.id}
       onChange={(event, value) => {
         const server: any = servers.find((server) => server.id === value);
-        directoryContentsMutation.mutate({
-          path: "/",
-          server,
-        });
+        directoryContentsMutation.mutate(
+          {
+            path: "/",
+            server,
+          },
+          {
+            onSuccess: (res, variables) => {
+              setCurrentServer(variables.server);
+            },
+          }
+        );
       }}
     >
       <TabList
@@ -42,11 +52,11 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
         })}
       </TabList>
 
-      <TabPanel value={clickedServer?.id}>
+      <TabPanel value={currentServer?.id}>
         {directoryContentsMutation.isPending ? (
           <CircularProgress />
         ) : (
-          <FileList files={fileLists} server={clickedServer} />
+          <FileList files={fileLists} server={currentServer} />
         )}
       </TabPanel>
     </Tabs>
