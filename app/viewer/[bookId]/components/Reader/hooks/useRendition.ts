@@ -22,11 +22,9 @@ function useRendition({
     const render = async () => {
       var eBook = ePub(book.content);
       var rendition = eBook.renderTo(nodeId, {
-        width: 600,
-        height: 400,
         flow: "paginated",
       });
-      debugger;
+
       const r: any = await rendition.display(
         location ? location.start : undefined
       );
