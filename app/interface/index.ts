@@ -1,5 +1,5 @@
 import { AuthType } from "webdav";
-import Page from "../viewer/[bookId]/components/Reader/types/pageType";
+
 
 export interface IServerFormData {
   id?: string;
@@ -14,7 +14,7 @@ export interface IServerFormData {
 export interface IBook {
   id: string;
   name: string;
-  location: Page;
+  location: any;
   serverId: string;
-  content: Blob;
+  content: any;
 }

@@ -10,15 +10,12 @@ import queryString from "query-string";
 import { repubCache } from "@/app/utils/cache";
 import Reader from "./components/Reader";
 import useBooksContent from "@/app/store/useBooksContent";
+import ReaderContainer from "./components/ReaderContainer";
 
 function Page({ params }: { params: { bookId: string } }) {
-  const { books } = useBooksContent();
-  const { books: booksPagination } = useIndexStore();
-  const cBook: any = books.find((book) => book.id === params.bookId);
-  const pBook: any = booksPagination.find((book) => book.id === params.bookId);
   return (
     <div style={{ position: "relative", height: "100%" }}>
-      <Reader book={cBook} bookPagination={pBook} />
+      <ReaderContainer />
     </div>
   );
 }

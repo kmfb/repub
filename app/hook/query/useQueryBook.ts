@@ -5,7 +5,7 @@ import useIndexStore from "@/app/store";
 import useBooksContent from "@/app/store/useBooksContent";
 import { getBookId } from "@/app/utils";
 import { repubCache } from "@/app/utils/cache";
-import { initialCurrentLocation } from "@/app/viewer/[bookId]/components/Reader/slices/book";
+
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -31,7 +31,7 @@ function useQueryBook() {
       addBook({
         id: bookId,
         name: variables.file.filename,
-        location: initialCurrentLocation,
+        location: "",
         serverId: variables.server.id as any,
         content: res.data,
       });

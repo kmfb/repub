@@ -12,7 +12,7 @@ import { repubCache } from "../utils/cache";
 import { getBookId, getFileNameByPath } from "../utils";
 import useIndexStore from "../store";
 import useQueryDirectoryContents from "../hook/query/useQueryDirectoryContents";
-import { initialCurrentLocation } from "../viewer/[bookId]/components/Reader/slices/book";
+
 import useBooksContent from "../store/useBooksContent";
 export interface IFile {
   filename: string;
@@ -71,7 +71,7 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
     addBook({
       id: bookId,
       name: file.filename,
-      location: initialCurrentLocation,
+      location: "",
       serverId: server.id as any,
       content,
     });
