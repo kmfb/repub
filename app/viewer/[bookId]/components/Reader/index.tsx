@@ -15,9 +15,11 @@ function Reader({}: Props) {
   const { books: booksPagination } = useIndexStore();
   const cBook: any = books.find((book) => book.id === params.bookId);
   const pBook: any = booksPagination.find((book) => book.id === params.bookId);
+  debugger;
   const rendition = useRendition({
     book: cBook,
     nodeId: "area",
+    location: pBook?.location,
   });
 
   return (

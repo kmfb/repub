@@ -1,5 +1,5 @@
 import { AuthType } from "webdav";
-
+import { ILocation } from "../viewer/[bookId]/types";
 
 export interface IServerFormData {
   id?: string;
@@ -14,7 +14,7 @@ export interface IServerFormData {
 export interface IBook {
   id: string;
   name: string;
-  location: any;
+  location?: ILocation;
   serverId: string;
   content: any;
 }

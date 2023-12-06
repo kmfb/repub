@@ -42,7 +42,7 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
   const queryBookMutation = useQueryBook();
   const directoryContentsMutation = useQueryDirectoryContents();
   const router = useRouter();
-  const { currentPath } = useIndexStore();
+  const { currentPath, addBook: addBookPersist } = useIndexStore();
   const { addBook } = useBooksContent();
   console.log(currentPath, "currentPath");
   const { books } = useIndexStore();
@@ -57,9 +57,9 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
 
     const bookId = getBookId(file, server);
     const cachedBookRes = await repubCache.read(bookId);
-    debugger;
+ 
     if (!cachedBookRes) {
-      debugger;
+   
       queryBookMutation.mutate({
         file,
         server,
@@ -67,14 +67,14 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
       return;
     }
     const content = await cachedBookRes.blob();
-
-    addBook({
+    const book = {
       id: bookId,
       name: file.filename,
-      location: "",
       serverId: server.id as any,
       content,
-    });
+    }
+    addBook(book);
+    addBookPersist(book)
     router.push(`/viewer/${bookId}`);
   };
   useEffect(() => {

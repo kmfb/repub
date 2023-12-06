@@ -2,8 +2,17 @@ import { IBook } from "@/app/interface";
 import ePub from "epubjs";
 import { useEffect, useRef, useState } from "react";
 import useReader from "../../../store";
+import { ILocation } from "../../../types";
 
-function useRendition({ book, nodeId }: { book: IBook; nodeId: string }) {
+function useRendition({
+  book,
+  nodeId,
+  location,
+}: {
+  book: IBook;
+  nodeId: string;
+  location: ILocation;
+}) {
   const displayed = useRef(false);
   const { rendition, setRendition } = useReader();
   useEffect(() => {
@@ -17,15 +26,18 @@ function useRendition({ book, nodeId }: { book: IBook; nodeId: string }) {
         height: 400,
         flow: "paginated",
       });
+      debugger;
+      const r: any = await rendition.display(
+        location ? location.start : undefined
+      );
 
-      const r: any = await rendition.display();
       setRendition(rendition);
     };
 
     render();
 
     displayed.current = true;
-  }, []);
+  }, [location]);
   return rendition;
 }
 export default useRendition;

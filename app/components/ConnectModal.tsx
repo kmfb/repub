@@ -111,7 +111,6 @@ function ConnectModal() {
                           }
                           checked={isHttps(value)}
                           onChange={(e) => {
-                            debugger;
                             onChange(e.target.checked ? "https" : "http");
                           }}
                         />

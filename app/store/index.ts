@@ -68,24 +68,24 @@ const useIndexStore = create<IndexState & IndexActions>()(
     })),
     {
       name: "index-storage", // name of the item in the storage (must be unique)
-      partialize: async (state) => {
-        const res = Object.fromEntries(
-          Object.entries(state).filter(([key]) => !["foo"].includes(key))
-        );
-        console.log("partialize", res);
-        const books = res.books;
+      // partialize: async (state) => {
+      //   const res = Object.fromEntries(
+      //     Object.entries(state).filter(([key]) => !["foo"].includes(key))
+      //   );
+      //   console.log("partialize", res);
+      //   const books = res.books;
 
-        if (!_.isEmpty(res.currentServer)) {
-          await uploadFile(
-            {
-              books,
-            },
-            res.currentServer
-          );
-        }
+      //   if (!_.isEmpty(res.currentServer)) {
+      //     await uploadFile(
+      //       {
+      //         books,
+      //       },
+      //       res.currentServer
+      //     );
+      //   }
 
-        return res;
-      },
+      //   return res;
+      // },
     }
   )
 );

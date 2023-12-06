@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function useQueryBook() {
   const { addBook } = useBooksContent();
+  const { addBook: addBookPersist } = useIndexStore();
   const router = useRouter();
 
   const query = useMutation({
@@ -27,15 +28,16 @@ function useQueryBook() {
       if (!cachedBookRes) {
         await repubCache.create(bookId, new Response(res.data));
       }
-
-      addBook({
+      const book = {
         id: bookId,
         name: variables.file.filename,
-        location: "",
+
         serverId: variables.server.id as any,
         content: res.data,
-      });
+      };
 
+      addBook(book);
+      addBookPersist(book);
       router.push(`/viewer/${bookId}`);
     },
   });

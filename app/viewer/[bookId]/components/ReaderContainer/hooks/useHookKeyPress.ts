@@ -23,7 +23,7 @@ function useHookKeyPress() {
     if (!rendition) return;
 
     document.addEventListener("keyup", handleKeyPress, false);
-    debugger;
+
     rendition.on("keyup", handleKeyPress);
 
     return () => {
