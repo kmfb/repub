@@ -54,7 +54,7 @@ const EpubViewer = (
   const [book, setBook] = useState<Book | null>(null);
 
   const [rendition, setRendition] = useState<Rendition | null>(null);
-
+  const bookLocations = useRef<any>(null);
   const currentCfi = useRef<string>("");
 
   /**
@@ -243,7 +243,7 @@ const EpubViewer = (
         if (!book) return;
         debugger;
 
-        const stored = localStorage.getItem(book.key() + "-locations");
+        const stored = bookLocations.current;
         if (stored) {
           return book.locations.load(stored);
         } else {
@@ -252,7 +252,7 @@ const EpubViewer = (
       })
       .then(() => {
         if (!book) return;
-        localStorage.setItem(book.key() + "-locations", book.locations.save());
+        bookLocations.current = book.locations.save();
       });
   }, [book, bookChanged, tocChanged]);
 
@@ -285,9 +285,7 @@ const EpubViewer = (
       if (!mounted) return;
 
       if (book.spine) {
-        const loc = location
-          ? location.startCfi
-          : book.rendition?.location?.start?.cfi;
+        const loc = book.rendition?.location?.start?.cfi;
 
         // if (book.rendition) book.rendition.destroy();
 
@@ -297,10 +295,7 @@ const EpubViewer = (
           ...epubOptions,
         });
         setRendition(rendition_);
-        debugger;
-        if (!isLoaded) {
-          return () => {};
-        }
+
         if (loc) {
           rendition_.display(loc);
         } else {

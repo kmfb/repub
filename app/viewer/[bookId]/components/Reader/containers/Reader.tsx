@@ -128,12 +128,7 @@ const Reader = ({ book: serverBook, bookPagination, loadingView }: Props) => {
    * @param page Epub page
    */
   const onPageChange = (page: Page, isLoaded: boolean) => {
-    debugger;
-    console.log(isLoaded, "im isLoadedis");
-    // updateSeverBooks(page);
-    if (!isLoaded) {
-      return;
-    }
+
 
     updateSeverBooks(page);
     return dispatch(updateCurrentPage(page));
@@ -154,7 +149,6 @@ const Reader = ({ book: serverBook, bookPagination, loadingView }: Props) => {
   console.log(currentLocation, "im currentLocation");
 
   const updateSeverBooks = (location: any) => {
-    debugger;
     setBooks(
       books.map((book) => {
         if (book.id === params.bookId) {
