@@ -23,6 +23,7 @@ function useRendition({
       var eBook = ePub(book.content);
       var rendition = eBook.renderTo(nodeId, {
         flow: "paginated",
+        allowScriptedContent: true,
       });
 
       const r: any = await rendition.display(
