@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Description as DescriptionIcon,
@@ -14,6 +14,10 @@ import useIndexStore from "../store";
 import useQueryDirectoryContents from "../hook/query/useQueryDirectoryContents";
 
 import useBooksContent from "../store/useBooksContent";
+import { useQuery } from "@tanstack/react-query";
+import _ from "lodash";
+import { CircularProgress } from "@mui/joy";
+import progressStore from "../store/progressStore";
 export interface IFile {
   filename: string;
   basename: string;
@@ -38,13 +42,41 @@ const getFileIcon = (type: string) => {
   }
 };
 
+const ProgressBar = (props: { file: IFile; server: IServerFormData }) => {
+  const { file, server } = props;
+  const bookId = getBookId(file, server);
+  const { subscribe, getState } = progressStore;
+  const states: any = getState();
+  const currentBook = states.books[bookId];
+
+  const [value, setValue] = useState<any>(
+    currentBook ? currentBook.progress * 100 : null
+  );
+
+  subscribe((state: any, prev) => {
+    if (!state.books[bookId]) return;
+    const p: any = state.books[bookId].progress;
+    setValue(p * 100);
+  });
+
+  if (!_.isNumber(value)) {
+    return null;
+  }
+
+  return (
+    <div>
+      <CircularProgress determinate value={value} />
+    </div>
+  );
+};
+
 const FileList: React.FC<FileListProps> = ({ files, server }) => {
   const queryBookMutation = useQueryBook();
   const directoryContentsMutation = useQueryDirectoryContents();
   const router = useRouter();
   const { currentPath, addBook: addBookPersist } = useIndexStore();
   const { addBook } = useBooksContent();
-  console.log(currentPath, "currentPath");
+
   const { books } = useIndexStore();
   const handleClickFile = async (file: IFile) => {
     if (file.type === "directory") {
@@ -57,9 +89,8 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
 
     const bookId = getBookId(file, server);
     const cachedBookRes = await repubCache.read(bookId);
- 
+
     if (!cachedBookRes) {
-   
       queryBookMutation.mutate({
         file,
         server,
@@ -72,9 +103,9 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
       name: file.filename,
       serverId: server.id as any,
       content,
-    }
+    };
     addBook(book);
-    addBookPersist(book)
+    addBookPersist(book);
     router.push(`/viewer/${bookId}`);
   };
   useEffect(() => {
@@ -97,6 +128,7 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
             <p className="ml-2 font-medium truncate">
               {getFileNameByPath(file.filename)}
             </p>
+            <ProgressBar file={file} server={server}></ProgressBar>
           </div>
         </div>
       ))}

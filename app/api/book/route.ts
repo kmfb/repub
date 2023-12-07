@@ -16,23 +16,24 @@ export interface IServerQueryObj
   url: string;
   path: string;
 }
+var blobStream = require("blob-stream");
+export const GET = withErrorHandler(
+  async (request: NextRequest, response: NextResponse) => {
+    const { headers, url } = request;
+    // JSON.parse("");
+    const parsed = queryString.parseUrl(url);
+    const { query } = parsed;
+    const config = getClientConfigFromUrl(url);
+    const client = createClient(config.url, _.omit(config, ["url"]));
 
-export const GET = withErrorHandler(async (request: NextRequest) => {
-  const { url } = request;
-  // JSON.parse("");
-  const config = getClientConfigFromUrl(url);
-  const client = createClient(config.url, _.omit(config, ["url"]));
+    const fileStream = client.createReadStream(config.path);
 
-  const buffer: any = await client.getFileContents(config.path);
-  // const zip = new JSZip();
-  // zip.file("file.epub", buffer); // add file buffer to zip
-  // const blob = await zip.generateAsync({ type: "blob" });
-  const blob = new Blob([buffer]);
-
-  return new Response(blob, {
-    headers: {
-      "Content-Type": "application/zip",
-      "Content-Disposition": "attachment; filename=download.zip",
-    },
-  });
-});
+    return new Response(fileStream as any, {
+      headers: {
+        "Content-Type": "application/zip",
+        "Content-Disposition": "attachment; filename=download.zip",
+        "Content-Length": query.fileSize as string,
+      },
+    });
+  }
+);

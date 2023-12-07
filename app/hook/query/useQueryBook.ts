@@ -21,10 +21,10 @@ function useQueryBook() {
     mutationFn: ({ file, server }: { file: IFile; server: IServerFormData }) =>
       getFile(file, server),
     onSuccess: async (res, variables) => {
-      console.log(res, "im use");
+    
       const bookId = getBookId(variables.file, variables.server);
       const cachedBookRes = await repubCache.read(bookId);
-      console.log(cachedBookRes, "im cachedBook");
+     
       if (!cachedBookRes) {
         await repubCache.create(bookId, new Response(res.data));
       }

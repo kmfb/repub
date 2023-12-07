@@ -22,7 +22,6 @@ export const GET = withErrorHandler(async (request: NextRequest) => {
 
   const getDirectoryItems = async () => {
     const directoryItems = await client.getDirectoryContents(config.path);
-    console.log(directoryItems, "directoryItems");
 
     return directoryItems;
   };

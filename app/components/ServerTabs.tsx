@@ -11,15 +11,8 @@ import FileList from "./FileList";
 import useIndexStore from "../store";
 function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const directoryContentsMutation = useQueryDirectoryContents();
-  console.log(directoryContentsMutation, "directoryContentsMutation");
+
   const { fileLists, setCurrentServer, currentServer } = useIndexStore();
-
-  // const clickedServer: any = _.get(
-  //   directoryContentsMutation,
-  //   "variables.server"
-  // );
-
-  console.log(currentServer, "im current");
 
   return (
     <Tabs

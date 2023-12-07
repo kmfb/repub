@@ -10,13 +10,11 @@ function useHookClick() {
       const offsetX = event.clientX % width;
 
       const half = width / 2;
-      console.log(event);
+   
       if (offsetX < half) {
         rendition.prev();
-        console.log("prev");
       } else {
         rendition.next();
-        console.log("next");
       }
     };
 

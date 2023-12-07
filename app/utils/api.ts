@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { logError } from "../lib/winston";
 
 function withErrorHandler(fn: any) {
-  return async function (request: NextRequest, ...args: any) {
+  return async function (request: NextRequest, response: NextResponse) {
     try {
-      return await fn(request, ...args);
+      return await fn(request, response);
     } catch (error: any) {
       // Log the error to a logging system
       logError({ error, requestBody: request, location: fn.name });

@@ -68,60 +68,11 @@ const useIndexStore = create<IndexState & IndexActions>()(
     })),
     {
       name: "index-storage", // name of the item in the storage (must be unique)
-      // partialize: async (state) => {
-      //   const res = Object.fromEntries(
-      //     Object.entries(state).filter(([key]) => !["foo"].includes(key))
-      //   );
-      //   console.log("partialize", res);
-      //   const books = res.books;
-
-      //   if (!_.isEmpty(res.currentServer)) {
-      //     await uploadFile(
-      //       {
-      //         books,
-      //       },
-      //       res.currentServer
-      //     );
-      //   }
-
-      //   return res;
-      // },
     }
   )
 );
 
 
-// const useIndexStore = create<IndexState & IndexActions>()(
-//   immer((set) => ({
-//     books: [],
-//     currentPath: [],
-//     fileLists: [],
-//     addBook: (book: IBook) =>
-//       set((state) => {
-//         const hasBook = state.books.find((b) => b.id === book.id);
-//         if (hasBook) {
-//           return;
-//         }
-//         state.books.push(book);
-//       }),
-//     setBooks: (books: IBook[]) =>
-//       set((state) => {
-//         state.books = books;
-//       }),
-//     pushPath: (path: string) =>
-//       set((state) => {
-//         state.currentPath.push(path);
-//       }),
-//     popPath: () =>
-//       set((state) => {
-//         state.currentPath.pop();
-//       }),
 
-//     setFileLists: (fileLists: IFile[]) =>
-//       set((state) => {
-//         state.fileLists = fileLists;
-//       }),
-//   }))
-// );
 
 export default useIndexStore;
