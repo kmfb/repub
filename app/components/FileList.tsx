@@ -88,6 +88,7 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
     }
 
     const bookId = getBookId(file, server);
+    debugger;
     const cachedBookRes = await repubCache.read(bookId);
 
     if (!cachedBookRes) {

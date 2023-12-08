@@ -16,7 +16,7 @@ function useRendition({
   const displayed = useRef(false);
   const { rendition, setRendition } = useReader();
   useEffect(() => {
-    if (displayed.current) {
+    if (displayed.current || !book?.content) {
       return () => {};
     }
     const render = async () => {
@@ -36,7 +36,7 @@ function useRendition({
     render();
 
     displayed.current = true;
-  }, [location]);
+  }, [location, book]);
   return rendition;
 }
 export default useRendition;
