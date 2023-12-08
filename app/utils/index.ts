@@ -28,6 +28,19 @@ export const getClientConfigFromUrl: (url: string) => IServerQueryObj = (
   };
 };
 
+export const getClientConfigFromServer = (
+  server: IServerFormData,
+  path: string = "/"
+) => {
+  return {
+    url: getSeverId(server),
+    username: server.username,
+    password: server.password,
+    authType: server.authType,
+    path: path,
+  };
+};
+
 export const getBookId = (file: IFile, server: IServerFormData) => {
   const id = `${getSeverId(server)}${file.filename}${file.lastmod}`;
   return md5(id);
@@ -38,24 +51,35 @@ export const getFileNameByPath = (path: string) => {
   return arr[arr.length - 1];
 };
 
+function createBufferlikeFromJSON(jsonString: string) {
+  const jsonData = JSON.parse(jsonString);
+  if (typeof jsonData === "string") {
+    return Buffer.from(jsonData); // for strings
+  } else if (Array.isArray(jsonData)) {
+    return Buffer.from(jsonData); // for arrays
+  } else if (typeof jsonData === "object") {
+    return Buffer.from(JSON.stringify(jsonData)); // for objects
+  } else {
+    throw new Error("Unsupported JSON data type");
+  }
+}
+
 export async function uploadJsonToWebdav(
   obj: object,
   filename: string,
   webdavClient: WebDAVClient
 ): Promise<void> {
   const json = JSON.stringify(obj);
+  debugger;
 
-  const file = new Blob([json], { type: "application/json" });
-
-  const fileUrl = URL.createObjectURL(file);
+  const file = createBufferlikeFromJSON(json);
 
   try {
-    await webdavClient.putFileContents(fileUrl, `/files/${filename}`);
+    await webdavClient.putFileContents(`/data/${filename}`, file);
 
     console.log("Upload successful!");
   } catch (error) {
     console.error("Upload failed", error);
   } finally {
-    URL.revokeObjectURL(fileUrl);
   }
 }

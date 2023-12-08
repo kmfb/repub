@@ -16,6 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getDirectoryContents } from "../clientApi";
 function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const directoryContentsMutation = useQueryDirectoryContents();
+  const { setCurrentServer } = useIndexStore();
   const {
     getQueryValueByKey,
     createQueryString,
@@ -26,7 +27,7 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const currentServer = getQueryValueByKey("currentServer");
   const currentPath = getQueryValueByKey("currentPath");
 
-  const { data: fileListsRes } = useQuery({
+  const { data: fileListsRes, isLoading } = useQuery({
     queryKey: ["fileLists", currentPath],
     queryFn: () =>
       getDirectoryContents(currentPath[currentPath.length - 1], currentServer),
@@ -42,7 +43,7 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
       value={currentServer ? currentServer?.id : null}
       onChange={(event, value) => {
         const server: any = servers.find((server) => server.id === value);
-
+        setCurrentServer(server);
         const qs = createQueryStringFromObj({
           currentServer: JSON.stringify(server),
           currentPath: JSON.stringify(["/"]),
@@ -62,7 +63,7 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
       </TabList>
 
       <TabPanel value={currentServer?.id}>
-        {directoryContentsMutation.isPending ? (
+        {isLoading ? (
           <CircularProgress />
         ) : (
           <FileList files={fileLists} server={currentServer} />

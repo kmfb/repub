@@ -5,7 +5,11 @@ import { immer } from "zustand/middleware/immer";
 import { IBook, IServerFormData } from "../interface";
 import { IFile } from "../components/FileList";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { getClientConfigFromUrl, uploadJsonToWebdav } from "../utils";
+import {
+  getClientConfigFromServer,
+  getClientConfigFromUrl,
+  uploadJsonToWebdav,
+} from "../utils";
 import queryString from "query-string";
 import _ from "lodash";
 import { createClient } from "webdav";
@@ -68,6 +72,24 @@ const useIndexStore = create<IndexState & IndexActions>()(
     })),
     {
       name: "index-storage", // name of the item in the storage (must be unique)
+      partialize: (state) => {
+        const syncStateToWebdav = async () => {
+          const currentServer = state.currentServer;
+          const config = getClientConfigFromServer(currentServer);
+          const webdavClient = createClient(
+            config.url,
+            _.omit(config, ["url"])
+          );
+
+          await uploadJsonToWebdav(
+            _.pick(state, ["books", "currentServer"]),
+            "indexStorage.json",
+            webdavClient
+          );
+        };
+        syncStateToWebdav();
+        return state;
+      },
     }
   )
 );
