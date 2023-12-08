@@ -1,5 +1,5 @@
 import { CircularProgress, TabList, TabPanel, Tabs } from "@mui/joy";
-import React from "react";
+import React, { useEffect } from "react";
 import SeverTab from "./SeverTab";
 
 import { AuthType, createClient } from "webdav";
@@ -9,29 +9,45 @@ import useQueryDirectoryContents from "../hook/query/useQueryDirectoryContents";
 import _ from "lodash";
 import FileList from "./FileList";
 import useIndexStore from "../store";
+import queryString from "query-string";
+import { useRouter } from "next/router";
+import useSearchParamsUtil from "../hook/useSearchParamsUtil";
+import { useQuery } from "@tanstack/react-query";
+import { getDirectoryContents } from "../clientApi";
 function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const directoryContentsMutation = useQueryDirectoryContents();
+  const {
+    getQueryValueByKey,
+    createQueryString,
+    createQueryStringFromObj,
+    push,
+  } = useSearchParamsUtil();
 
-  const { fileLists, setCurrentServer, currentServer } = useIndexStore();
+  const currentServer = getQueryValueByKey("currentServer");
+  const currentPath = getQueryValueByKey("currentPath");
+
+  const { data: fileListsRes } = useQuery({
+    queryKey: ["fileLists", currentPath],
+    queryFn: () =>
+      getDirectoryContents(currentPath[currentPath.length - 1], currentServer),
+    enabled: !!currentPath,
+  });
+
+  const fileLists = _.get(fileListsRes, "data.data");
 
   return (
     <Tabs
       aria-label="Vertical tabs"
       orientation="vertical"
-      value={currentServer.id}
+      value={currentServer ? currentServer?.id : null}
       onChange={(event, value) => {
         const server: any = servers.find((server) => server.id === value);
-        directoryContentsMutation.mutate(
-          {
-            path: "/",
-            server,
-          },
-          {
-            onSuccess: (res, variables) => {
-              setCurrentServer(variables.server);
-            },
-          }
-        );
+
+        const qs = createQueryStringFromObj({
+          currentServer: JSON.stringify(server),
+          currentPath: JSON.stringify(["/"]),
+        });
+        push(qs);
       }}
     >
       <TabList

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import {
   Description as DescriptionIcon,
@@ -7,7 +7,7 @@ import {
 import { IServerFormData } from "../interface";
 import useQueryBook from "../hook/query/useQueryBook";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { repubCache } from "../utils/cache";
 import { getBookId, getFileNameByPath } from "../utils";
 import useIndexStore from "../store";
@@ -18,6 +18,8 @@ import { useQuery } from "@tanstack/react-query";
 import _ from "lodash";
 import { CircularProgress } from "@mui/joy";
 import progressStore from "../store/progressStore";
+import queryString from "query-string";
+import useSearchParamsUtil from "../hook/useSearchParamsUtil";
 export interface IFile {
   filename: string;
   basename: string;
@@ -74,9 +76,10 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
   const queryBookMutation = useQueryBook();
   const directoryContentsMutation = useQueryDirectoryContents();
   const router = useRouter();
-  const { currentPath, addBook: addBookPersist } = useIndexStore();
+  const searchParamsUtil = useSearchParamsUtil();
+  const { addBook: addBookPersist } = useIndexStore();
   const { addBook } = useBooksContent();
-
+  const searchParams = useSearchParams();
   const { books } = useIndexStore();
   const handleClickFile = async (file: IFile) => {
     if (file.type === "directory") {
@@ -109,14 +112,16 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
     addBookPersist(book);
     router.push(`/viewer/${bookId}`);
   };
-  useEffect(() => {
-    console.log("sync server", books);
-  }, [books]);
+
+  const currentPath = searchParamsUtil.getQueryValueByKey("currentPath");
+
   if (!files) return null;
 
   return (
     <div className="flex flex-wrap">
-      <h2 className="w-full mb-4">{currentPath[currentPath.length - 1]}</h2>
+      <h2 className="w-full mb-4">
+        {currentPath ? currentPath[currentPath.length - 1] : ""}
+      </h2>
 
       {files.map((file) => (
         <div

@@ -9,6 +9,9 @@ export const isHttps = (protocol: string) => {
 };
 
 export const getSeverId = (server: IServerFormData) => {
+  if (!server) {
+    return "";
+  }
   return `${server.protocol}://${server.host}:${server.port}`;
 };
 export const getClientConfigFromUrl: (url: string) => IServerQueryObj = (
