@@ -38,3 +38,71 @@
 {"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
 {"level":"error","message":"{\"errorMessage\":\"Invalid response: 401 Unauthorized\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
 {"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid URL\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 409 Conflict\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 404 Not Found\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 400 Bad Request\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 400 Bad Request\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 400 Bad Request\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 400 Bad Request\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 400 Bad Request\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 400 Bad Request\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 400 Bad Request\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}
+{"level":"error","message":"{\"errorMessage\":\"Invalid response: 410 Gone\",\"requestBody\":{},\"location\":\"\"}","service":"user-service"}

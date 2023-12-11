@@ -7,7 +7,7 @@ function withErrorHandler(fn: any) {
       return await fn(request, response);
     } catch (error: any) {
       // Log the error to a logging system
-      logError({ error, requestBody: request, location: fn.name });
+      logError({ error, requestBody: request.json(), location: fn.name });
       // Respond with a generic 500 Internal Server Error
       return new Response("Internal Server Error", { status: 500 });
     }

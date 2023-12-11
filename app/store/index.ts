@@ -13,8 +13,9 @@ import {
 import queryString from "query-string";
 import _ from "lodash";
 import { createClient } from "webdav";
-import axios from "axios";
+
 import { uploadFile } from "../clientApi";
+import axios from "../lib/axios";
 interface IndexState {
   books: Array<IBook>;
   currentPath: Array<string>;
@@ -75,17 +76,14 @@ const useIndexStore = create<IndexState & IndexActions>()(
       partialize: (state) => {
         const syncStateToWebdav = async () => {
           const currentServer = state.currentServer;
-          const config = getClientConfigFromServer(currentServer);
-          const webdavClient = createClient(
-            config.url,
-            _.omit(config, ["url"])
+          if (_.isEmpty(currentServer)) {
+            return;
+          }
+          const res = await axios.post(
+            `/webdav/putFileContents?${queryString.stringify(currentServer)}`,
+            _.pick(state, ["books", "currentServer"])
           );
-
-          await uploadJsonToWebdav(
-            _.pick(state, ["books", "currentServer"]),
-            "indexStorage.json",
-            webdavClient
-          );
+          console.log(res, "res from server");
         };
         syncStateToWebdav();
         return state;

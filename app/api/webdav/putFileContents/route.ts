@@ -15,8 +15,9 @@ export interface IServerQueryObj
 }
 
 export const POST = withErrorHandler(async (request: NextRequest) => {
-  const { url, body } = request;
+  const { url } = request;
   // JSON.parse("");
+  const body = await request.json();
   const config = getClientConfigFromUrl(url);
   const client = createClient(config.url, _.omit(config, ["url"]));
 
@@ -24,7 +25,10 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
     const json = JSON.stringify(body);
 
     const buffer = Buffer.from(json);
-    const isSuccess = await client.putFileContents("/data/data.json", buffer);
+    const isSuccess = await client.putFileContents(
+      "/.repub/index-storage.json",
+      buffer
+    );
 
     return isSuccess;
   };

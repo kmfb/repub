@@ -13,10 +13,10 @@ import queryString from "query-string";
 import { useRouter } from "next/router";
 import useSearchParamsUtil from "../hook/useSearchParamsUtil";
 import { useQuery } from "@tanstack/react-query";
-import { getDirectoryContents } from "../clientApi";
+import { getDirectoryContents, getFile } from "../clientApi";
 function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const directoryContentsMutation = useQueryDirectoryContents();
-  const { setCurrentServer } = useIndexStore();
+  const { setCurrentServer, setBooks } = useIndexStore();
   const {
     getQueryValueByKey,
     createQueryString,
@@ -31,10 +31,45 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
     queryKey: ["fileLists", currentPath],
     queryFn: () =>
       getDirectoryContents(currentPath[currentPath.length - 1], currentServer),
-    enabled: !!currentPath,
+    enabled: !!currentPath && !_.isEmpty(currentServer),
+  });
+
+  const { data: booksPaginationRes, isLoading: isBPLoading } = useQuery({
+    queryKey: ["booksPagination", currentServer],
+    queryFn: () =>
+      getFile(
+        {
+          filename: "/.repub/index-storage.json",
+          size: 1218,
+        } as any,
+        currentServer
+      ),
+    enabled: !!currentServer,
   });
 
   const fileLists = _.get(fileListsRes, "data.data");
+  const blobToJson = (blob: any) => {
+    return new Promise((resolve, reject) => {
+      const reader: any = new FileReader();
+      reader.onload = () => {
+        resolve(JSON.parse(reader.result));
+      };
+      reader.onerror = reject;
+      reader.readAsText(blob);
+    });
+  };
+  useEffect(() => {
+    if (!booksPaginationRes) return;
+    const getRes = async () => {
+      const res: any = await blobToJson(booksPaginationRes.data);
+
+      if (!res) {
+        return;
+      }
+      setBooks(res.books);
+    };
+    getRes();
+  }, [booksPaginationRes]);
 
   return (
     <Tabs
