@@ -125,7 +125,7 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
       <h2 className="w-full mb-4">
         {currentPath ? currentPath[currentPath.length - 1] : ""}
       </h2>
-      <div className="mx-auto">
+      <div className="">
         <div className="flex flex-wrap gap-x-2 gap-y-2">
           {files.map((file) => (
             <div

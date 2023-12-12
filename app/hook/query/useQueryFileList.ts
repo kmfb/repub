@@ -12,6 +12,12 @@ function useQueryFileList() {
     queryFn: () =>
       getDirectoryContents(currentPath[currentPath.length - 1], currentServer),
     enabled: !!currentPath && !_.isEmpty(currentServer),
+    retry(failureCount, error) {
+      if (failureCount >= 2) {
+        return false;
+      }
+      return true;
+    },
   });
 
   const fileList = _.get(fileListsRes, "data.data");

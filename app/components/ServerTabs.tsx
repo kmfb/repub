@@ -10,8 +10,7 @@ import FileList from "./FileList";
 import useIndexStore from "../store";
 
 import useSearchParamsUtil from "../hook/useSearchParamsUtil";
-import { useQuery } from "@tanstack/react-query";
-import { getDirectoryContents } from "../clientApi";
+
 import useSyncPagination from "../hook/query/useSyncPagination";
 import useQueryFileList from "../hook/query/useQueryFileList";
 import useServerActions from "../hook/actions/useServerActions";
