@@ -10,7 +10,7 @@ import queryString from "query-string";
 import _ from "lodash";
 import { createClient } from "webdav";
 
-import { uploadFile } from "../clientApi";
+
 import axios from "../lib/axios";
 interface IndexState {
   books: Array<IBook>;
@@ -75,6 +75,11 @@ const useIndexStore = create<IndexState & IndexActions>()(
           if (_.isEmpty(currentServer)) {
             return;
           }
+          const isEmptyLocal = _.isEmpty(state.books);
+          if (isEmptyLocal) {
+            return;
+          }
+
           const res = await axios.post(
             `/webdav/putFileContents?${queryString.stringify(currentServer)}`,
             _.pick(state, ["books", "currentServer"])

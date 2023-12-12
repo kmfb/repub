@@ -21,7 +21,6 @@ function useSyncPagination() {
       getFile(
         {
           filename: "/.repub/index-storage.json",
-          size: 1218,
         } as any,
         currentServer
       ),
@@ -29,8 +28,12 @@ function useSyncPagination() {
   });
 
   useEffect(() => {
-    if (_.isEmpty(booksPaginationRes?.data)) return;
+    debugger;
+
     const getRes = async () => {
+      if (!(booksPaginationRes?.data instanceof Blob)) {
+        return;
+      }
       const res: any = await blobToJson(booksPaginationRes?.data);
 
       if (!res) {

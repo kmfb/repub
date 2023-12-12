@@ -10,8 +10,9 @@ import AlertDialogModal from "../ui/AlertDialog";
 import useServerActions from "../hook/actions/useServerActions";
 
 function SeverTab({ server }: { server: IServerFormData }) {
+ 
   const { open, setOpen, setCurrentEditServer } = useAddServerModal();
-  const { removeServer } = useServerActions();
+  const { removeServer, updateCurrentServerAndPushToPath } = useServerActions();
   const handleOpenEditServerModal = () => {
     setOpen(true);
     setCurrentEditServer(server);
@@ -26,7 +27,12 @@ function SeverTab({ server }: { server: IServerFormData }) {
         <ComputerRounded></ComputerRounded>
       </ListItemDecorator>
 
-      <div className="text-ellipsis w-10/12 overflow-hidden">
+      <div
+        className="text-ellipsis w-10/12 overflow-hidden"
+        onClick={() => {
+          updateCurrentServerAndPushToPath(server);
+        }}
+      >
         {getSeverId(server)}
       </div>
       <IconButton variant="plain" onClick={handleOpenEditServerModal}>

@@ -27,12 +27,14 @@ export const GET = withErrorHandler(
     const client = createClient(config.url, _.omit(config, ["url"]));
 
     const fileStream = client.createReadStream(config.path);
-
+    const fileSize = query.fileSize ? query.fileSize : null;
     return new Response(fileStream as any, {
       headers: {
         "Content-Type": "application/zip",
         "Content-Disposition": "attachment; filename=download.zip",
-        "Content-Length": query.fileSize as string,
+        ...(fileSize && {
+          "Content-Length": fileSize as string,
+        }),
       },
     });
   }

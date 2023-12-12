@@ -51,11 +51,3 @@ export const getFileDownloadUrl = (file: IFile, server: IServerFormData) => {
   return axios.get(`/book/download?${queryStr}`);
 };
 
-export const uploadFile = (json: any, server: IServerFormData) => {
-  const query = {
-    path: "/",
-    ...server,
-  };
-  const queryStr = queryString.stringify(query);
-  return axios.post(`/webdav/putFileContents?${queryStr}`, json);
-};
