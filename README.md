@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EPUB Reader
 
-## Getting Started
+This is an EPUB ebook reader web application built with Next.js. It enables users to access EPUB files from a WebDAV server, read ebooks, and sync reading locations across devices.
 
-First, run the development server:
+## Key Features
 
-```bash
+- WebDAV integration - Access EPUB files stored on a WebDAV server
+- EPUB reading - Read unprotected EPUB formatted ebooks 
+- Sync reading position - Sync last read location across devices  
+
+### Reading Experience
+
+The current page and location is synced across devices in real-time using the configured authentication credentials. Simply open the same book on another device and it will open to the current reading position.
+
+## Building and Deployment 
+
+This project uses Next.js and React. Recommended node version is 16+.
+
+```
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Compile and export static files for production:
+```
+npm run build
+npm run export
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The static export can be deployed to any web server. Configure authentication and syncing services appropriately.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Contributions
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Contributions are welcome! Please open issues or PRs for any bugs or improvements.
