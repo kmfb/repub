@@ -84,7 +84,6 @@ const useIndexStore = create<IndexState & IndexActions>()(
             `/webdav/putFileContents?${queryString.stringify(currentServer)}`,
             _.pick(state, ["books", "currentServer"])
           );
-          console.log(res, "res from server");
         };
         syncStateToWebdav();
         return state;

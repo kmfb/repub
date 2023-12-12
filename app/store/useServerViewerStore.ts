@@ -27,7 +27,7 @@ const useServerViewerStore = create<ServerState & ServerActions>()(
       removeServerConfig: (id: string) =>
         set((state) => {
           const index = state.servers.findIndex((s) => s.id === id);
-          debugger;
+       
           if (index === -1) {
             return;
           }

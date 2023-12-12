@@ -9,7 +9,7 @@ import { IServerFormData } from "@/app/interface";
 export const dynamic = "force-dynamic"; // defaults to force-static
 
 export interface IServerQueryObj
-  extends Omit<IServerFormData, "protocol" | "host" | "port"> {
+  extends Omit<IServerFormData, "protocol" | "port"> {
   url: string;
   path: string;
 }

@@ -21,9 +21,8 @@ function useQueryDirectoryContents() {
         currentServer: JSON.stringify(variables.server),
         currentPath: JSON.stringify(cp),
       });
-      debugger;
+
       router.push(`/?${qs}`);
-      setFileLists(res.data.data);
     },
   });
   return query;

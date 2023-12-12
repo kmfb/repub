@@ -28,10 +28,6 @@ function ServerTabs({ servers }: { servers: IServerFormData[] }) {
       aria-label="Vertical tabs"
       orientation="vertical"
       value={currentServer ? currentServer?.id : null}
-      // onChange={(event, value) => {
-      //   const server: any = servers.find((server) => server.id === value);
-      //   updateCurrentServerAndPushToPath(server);
-      // }}
     >
       <TabList
         sx={{

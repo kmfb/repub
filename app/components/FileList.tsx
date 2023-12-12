@@ -43,7 +43,7 @@ const getFileIcon = (type: string) => {
       return null;
   }
 };
-
+const filenameClass = "ml-2 font-medium truncate";
 const ProgressBar = (props: { file: IFile; server: IServerFormData }) => {
   const { file, server } = props;
   const bookId = getBookId(file, server);
@@ -89,9 +89,12 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
       });
       return;
     }
-
+    const isEpub = file.filename.endsWith(".epub");
+    if (!isEpub) {
+      return;
+    }
     const bookId = getBookId(file, server);
-    debugger;
+
     const cachedBookRes = await repubCache.read(bookId);
 
     if (!cachedBookRes) {
@@ -122,22 +125,29 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
       <h2 className="w-full mb-4">
         {currentPath ? currentPath[currentPath.length - 1] : ""}
       </h2>
-
-      {files.map((file) => (
-        <div
-          key={file.filename}
-          className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 cursor-pointer"
-          onClick={() => handleClickFile(file)}
-        >
-          <div className="border border-gray-300 rounded-lg p-3 flex items-center">
-            {getFileIcon(file.type)}
-            <p className="ml-2 font-medium truncate">
-              {getFileNameByPath(file.filename)}
-            </p>
-            <ProgressBar file={file} server={server}></ProgressBar>
-          </div>
+      <div className="mx-auto">
+        <div className="flex flex-wrap gap-x-2 gap-y-2">
+          {files.map((file) => (
+            <div
+              className="flex  cursor-pointer items-center rounded-lg border border-gray-200 bg-white p-2 transition hover:border-blue-500 hover:shadow-md"
+              onClick={() => handleClickFile(file)}
+              key={file.filename}
+            >
+              <div
+                className={`mr-2 flex h-10 w-10 items-center justify-center rounded-full`}
+              >
+                {getFileIcon(file.type)}
+              </div>
+              <div className=" mr-2">
+                <p className="text-sm font-medium text-black">
+                  {getFileNameByPath(file.filename)}
+                </p>
+              </div>
+              <ProgressBar file={file} server={server} />
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error, "error");
+   
     toast.error(error.message);
     return Promise.reject(error);
   }

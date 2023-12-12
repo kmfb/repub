@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AuthType, createClient } from "webdav";
 import queryString from "query-string";
-import { getClientConfigFromUrl } from "@/app/utils";
+import { getClientConfigFromUrl, getConfigPath } from "@/app/utils";
 
 import _ from "lodash";
 import { successResponse, withErrorHandler } from "@/app/utils/api";
@@ -25,10 +25,8 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
     const json = JSON.stringify(body);
 
     const buffer = Buffer.from(json);
-    const isSuccess = await client.putFileContents(
-      "/.repub/index-storage.json",
-      buffer
-    );
+    const configFilePath = getConfigPath(config as any, "index-storage.json");
+    const isSuccess = await client.putFileContents(configFilePath, buffer);
 
     return isSuccess;
   };

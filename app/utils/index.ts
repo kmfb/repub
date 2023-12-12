@@ -7,12 +7,33 @@ const md5 = require("md5");
 export const isHttps = (protocol: string) => {
   return protocol === "https";
 };
+export const getBasePathFromHost = (host: string) => {
+  if (!host) {
+    return ["", ""];
+  }
+  const isIncludeSlash = host.includes("/");
 
+  if (isIncludeSlash) {
+    const [url, basePath] = host.split("/");
+    return [url, `/${basePath}`];
+  }
+
+  return [host, "/"];
+};
+
+export const getConfigPath = (server: IServerFormData, fileName?: string) => {
+  const [_host, basePath] = getBasePathFromHost(server.host);
+  const bPath = basePath === "/" ? "/repub" : `${basePath}/repub`;
+  const configPath = fileName ? `${bPath}/${fileName}` : bPath;
+  return configPath;
+};
 export const getSeverId = (server: IServerFormData) => {
   if (!server) {
     return "";
   }
-  return `${server.protocol}://${server.host}:${server.port}`;
+  const [host] = getBasePathFromHost(server.host);
+
+  return `${server.protocol}://${host}:${server.port}`;
 };
 export const getClientConfigFromUrl: (url: string) => IServerQueryObj = (
   url: string
@@ -25,6 +46,7 @@ export const getClientConfigFromUrl: (url: string) => IServerQueryObj = (
     password: query.password as string,
     authType: query.authType as any,
     path: query.path as string,
+    host: query.host as string,
   };
 };
 

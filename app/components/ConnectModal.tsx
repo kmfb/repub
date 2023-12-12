@@ -40,10 +40,10 @@ function ConnectModal() {
         : {
             authType: AuthType.Password,
             protocol: "http",
-            port: 80,
-            host: "",
-            username: "",
-            password: "",
+            port: 31580,
+            host: "www.stardusted.top",
+            username: "kmfb",
+            password: "1q2w3e*",
           },
     });
 

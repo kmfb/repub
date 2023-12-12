@@ -18,7 +18,7 @@ function SeverTab({ server }: { server: IServerFormData }) {
     setCurrentEditServer(server);
   };
   const handleRemoveServer = (server: IServerFormData) => {
-    debugger;
+   
     removeServer(server.id);
   };
   return (
