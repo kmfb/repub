@@ -5,11 +5,7 @@ import { immer } from "zustand/middleware/immer";
 import { IBook, IServerFormData } from "../interface";
 import { IFile } from "../components/FileList";
 import { persist, createJSONStorage } from "zustand/middleware";
-import {
-  getClientConfigFromServer,
-  getClientConfigFromUrl,
-  uploadJsonToWebdav,
-} from "../utils";
+import { getClientConfigFromServer, getClientConfigFromUrl } from "../utils";
 import queryString from "query-string";
 import _ from "lodash";
 import { createClient } from "webdav";

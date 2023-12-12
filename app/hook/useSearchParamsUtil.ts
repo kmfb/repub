@@ -41,7 +41,11 @@ function useSearchParamsUtil() {
     [searchParams]
   );
 
-  const push = (qs: string) => {
+  const push = (qs?: string) => {
+    if (!qs) {
+      router.push(pathname);
+      return;
+    }
     router.push(pathname + "?" + qs);
   };
 

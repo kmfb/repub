@@ -15,35 +15,57 @@ import {
   Typography,
   Option,
 } from "@mui/joy";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { AuthType, createClient } from "webdav";
 import useAddServerModal from "../store/useAddServerModal";
 import useServerViewerStore from "../store/useServerViewerStore";
 import { IServerFormData } from "../interface";
 import { isHttps } from "../utils";
-import { v4 as uuidv4 } from 'uuid';
-
+import { v4 as uuidv4 } from "uuid";
+import _ from "lodash";
+import useServerActions from "../hook/actions/useServerActions";
 
 function ConnectModal() {
-  const { open, setOpen } = useAddServerModal();
-  const { addServerConfig } = useServerViewerStore();
-  const { register, handleSubmit, getValues, control } =
+  const { updateCurrentServerAndPushToPath } = useServerActions();
+  const { open, setOpen, setCurrentEditServer, currentEditServer } =
+    useAddServerModal();
+  const isEdit = !_.isEmpty(currentEditServer);
+
+  const { addServerConfig, updateServerConfig } = useServerViewerStore();
+  const { register, handleSubmit, getValues, control, setValue } =
     useForm<IServerFormData>({
-      defaultValues: {
-        authType: AuthType.Password,
-        protocol: "http",
-        port: 80,
-      },
+      values: isEdit
+        ? currentEditServer
+        : {
+            authType: AuthType.Password,
+            protocol: "http",
+            port: 80,
+            host: "",
+            username: "",
+            password: "",
+          },
     });
 
   const onSubmit = (data: IServerFormData) => {
-    addServerConfig({
-      id: uuidv4(),
-      ...data,
-    });
+    if (isEdit) {
+      updateServerConfig(data, currentEditServer.id as any);
+      updateCurrentServerAndPushToPath(data);
+    } else {
+      addServerConfig({
+        id: uuidv4(),
+        ...data,
+      });
+    }
+
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (!open) {
+      setCurrentEditServer({} as any);
+    }
+  }, [open]);
 
   return (
     <div>

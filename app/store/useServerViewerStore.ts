@@ -10,7 +10,8 @@ interface ServerState {
 
 interface ServerActions {
   addServerConfig: (config: IServerFormData) => void;
-  removeServerConfig: (host: string) => void;
+  removeServerConfig: (id: string) => void;
+  updateServerConfig: (config: IServerFormData, id: string) => void;
 }
 
 // Create your store
@@ -23,11 +24,22 @@ const useServerViewerStore = create<ServerState & ServerActions>()(
         set((state) => {
           state.servers.push(config);
         }),
-      removeServerConfig: (host: string) =>
+      removeServerConfig: (id: string) =>
         set((state) => {
-          state.servers = state.servers.filter(
-            (server) => server.host !== host
-          );
+          const index = state.servers.findIndex((s) => s.id === id);
+          debugger;
+          if (index === -1) {
+            return;
+          }
+          state.servers.splice(index, 1);
+        }),
+      updateServerConfig: (config: IServerFormData, id: string) =>
+        set((state) => {
+          const index = state.servers.findIndex((s) => s.id === id);
+          if (index === -1) {
+            return;
+          }
+          state.servers[index] = config;
         }),
     })),
     {

@@ -64,22 +64,13 @@ function createBufferlikeFromJSON(jsonString: string) {
   }
 }
 
-export async function uploadJsonToWebdav(
-  obj: object,
-  filename: string,
-  webdavClient: WebDAVClient
-): Promise<void> {
-  const json = JSON.stringify(obj);
-  debugger;
-
-  const file = createBufferlikeFromJSON(json);
-
-  try {
-    await webdavClient.putFileContents(`/data/${filename}`, file);
-
-    console.log("Upload successful!");
-  } catch (error) {
-    console.error("Upload failed", error);
-  } finally {
-  }
-}
+export const blobToJson = (blob: any) => {
+  return new Promise((resolve, reject) => {
+    const reader: any = new FileReader();
+    reader.onload = () => {
+      resolve(JSON.parse(reader.result));
+    };
+    reader.onerror = reject;
+    reader.readAsText(blob);
+  });
+};
