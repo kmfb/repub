@@ -127,25 +127,35 @@ const FileList: React.FC<FileListProps> = ({ files, server }) => {
       </h2>
       <div className="">
         <div className="flex flex-wrap gap-x-2 gap-y-2">
-          {files.map((file) => (
-            <div
-              className="flex  cursor-pointer items-center rounded-lg border border-gray-200 bg-white p-2 transition hover:border-blue-500 hover:shadow-md"
-              onClick={() => handleClickFile(file)}
-              key={file.filename}
-            >
+          {files
+            .toSorted((a, b) => {
+              if (a.type === b.type) {
+                return a.filename.localeCompare(b.filename);
+              }
+              if (a.type === "directory") {
+                return -1;
+              }
+              return 1;
+            })
+            .map((file) => (
               <div
-                className={`mr-2 flex h-10 w-10 items-center justify-center rounded-full`}
+                className="flex  cursor-pointer items-center rounded-lg border border-gray-200 bg-white p-2 transition hover:border-blue-500 hover:shadow-md"
+                onClick={() => handleClickFile(file)}
+                key={file.filename}
               >
-                {getFileIcon(file.type)}
+                <div
+                  className={`mr-2 flex h-10 w-10 items-center justify-center rounded-full`}
+                >
+                  {getFileIcon(file.type)}
+                </div>
+                <div className=" mr-2">
+                  <p className="text-sm font-medium text-black">
+                    {getFileNameByPath(file.filename)}
+                  </p>
+                </div>
+                <ProgressBar file={file} server={server} />
               </div>
-              <div className=" mr-2">
-                <p className="text-sm font-medium text-black">
-                  {getFileNameByPath(file.filename)}
-                </p>
-              </div>
-              <ProgressBar file={file} server={server} />
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>
