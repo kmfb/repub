@@ -51,18 +51,7 @@ export const getFileNameByPath = (path: string) => {
   return arr[arr.length - 1];
 };
 
-function createBufferlikeFromJSON(jsonString: string) {
-  const jsonData = JSON.parse(jsonString);
-  if (typeof jsonData === "string") {
-    return Buffer.from(jsonData); // for strings
-  } else if (Array.isArray(jsonData)) {
-    return Buffer.from(jsonData); // for arrays
-  } else if (typeof jsonData === "object") {
-    return Buffer.from(JSON.stringify(jsonData)); // for objects
-  } else {
-    throw new Error("Unsupported JSON data type");
-  }
-}
+
 
 export const blobToJson = (blob: any) => {
   return new Promise((resolve, reject) => {

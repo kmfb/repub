@@ -4,6 +4,7 @@ import { getFile } from "@/app/clientApi";
 import { useEffect } from "react";
 import { blobToJson } from "@/app/utils";
 import useIndexStore from "@/app/store";
+import _ from "lodash";
 
 function useSyncPagination() {
   const { setCurrentServer, setBooks } = useIndexStore();
@@ -28,9 +29,9 @@ function useSyncPagination() {
   });
 
   useEffect(() => {
-    if (!booksPaginationRes) return;
+    if (_.isEmpty(booksPaginationRes?.data)) return;
     const getRes = async () => {
-      const res: any = await blobToJson(booksPaginationRes.data);
+      const res: any = await blobToJson(booksPaginationRes?.data);
 
       if (!res) {
         return;
