@@ -16,10 +16,10 @@ import useQueryFileList from "../hook/query/useQueryFileList";
 import useServerActions from "../hook/actions/useServerActions";
 function ServerTabs({ servers }: { servers: IServerFormData[] }) {
   const { updateCurrentServerAndPushToPath } = useServerActions();
-  const { getQueryValueByKey } = useSearchParamsUtil();
+
   useSyncPagination();
   const { fileList, isLoading } = useQueryFileList();
-
+  const { getQueryValueByKey } = useSearchParamsUtil();
   const currentServer = getQueryValueByKey("currentServer");
 
   return (

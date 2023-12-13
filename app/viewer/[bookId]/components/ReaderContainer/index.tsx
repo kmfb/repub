@@ -11,8 +11,8 @@ import useHookLocationChanged from "./hooks/useHookLocationChanged";
 import useHookClick from "./hooks/useHookClick";
 
 function ReaderContainer() {
-  useHookKeyPress();
-  useHookLocationChanged();
+  // useHookKeyPress();
+  // useHookLocationChanged();
   useHookClick();
   return (
     <div>
