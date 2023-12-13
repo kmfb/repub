@@ -1,7 +1,6 @@
 # EPUB Reader
 
----
-[change to English version](README.md)
+[Change to English Version](README.md)
 
 这是一个使用 Next.js 构建的 EPUB 电子书阅读器 Web 应用程序。它使用户能够从 WebDAV 服务器访问 EPUB 文件,阅读电子书,并在设备之间同步阅读位置。
 

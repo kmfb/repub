@@ -1,8 +1,5 @@
 # EPUB Reader
-
----
 [切换至中文版](README_CN.md)
----
 
 This is a web application for reading EPUB ebooks built using Next.js. It allows users to access EPUB files stored on a WebDAV server, read the ebooks, and synchronize reading positions across devices.
 
