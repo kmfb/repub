@@ -1,28 +1,31 @@
 # EPUB Reader
 
-这是一个使用 Next.js 构建的 EPUB 电子书阅读器 Web 应用程序。它使用户能够从 WebDAV 服务器访问 EPUB 文件,阅读电子书,并在设备之间同步阅读位置。
+---
+[切换至中文版](README_CN.md)
+---
 
-## 主要功能
+This is a web application for reading EPUB ebooks built using Next.js. It allows users to access EPUB files stored on a WebDAV server, read the ebooks, and synchronize reading positions across devices.
 
-- WebDAV 集成 - 访问存储在 WebDAV 服务器上的 EPUB 文件
-- EPUB 阅读 - 阅读未加密的 EPUB 格式电子书 
-- 同步阅读位置 - 在设备之间同步上次阅读的位置
+## Key Features
 
-### 阅读体验
+- WebDAV integration - Access EPUB files stored on a WebDAV server
+- EPUB reading - Read unencrypted EPUB format ebooks
+- Sync reading position - Synchronize last read position across devices
 
-当前页面和位置使用配置的身份验证凭据在设备之间实时同步。只需在另一台设备上打开同一本书,它就会打开到当前的阅读位置。
+### Reading Experience
 
-## 构建和部署
+The current page and position are synchronized in real-time between devices using configured authentication credentials. Simply open the same book on another device, and it will open to the current reading position.
 
-这个项目使用 Next.js 和 React。推荐的 node 版本是 16+。
+## Build and Deployment
 
-### 部署到 Vercel
+This project uses Next.js and React. The recommended node version is 16+.
 
-点击下面的按钮将应用程序直接部署到 Vercel:
+### Deploying to Vercel
+
+Click the button below to directly deploy the application to Vercel:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/project?template=https://github.com/kmfb/repub)
 
+## Contribution
 
-## 贡献
-
-欢迎贡献!请打开 issue 或 PR 以报告任何错误或改进。
+Contributions are welcome! Please open an issue or PR to report any bugs or improvements.
