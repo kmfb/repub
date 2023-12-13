@@ -1,4 +1,4 @@
-import { IServerFormData } from "../interface";
+import { IBook, IServerFormData } from "../interface";
 import queryString from "query-string";
 import axios from "../lib/axios";
 import { IFile } from "../components/FileList";
@@ -7,6 +7,7 @@ import { getBookId } from "../utils";
 import { AxiosProgressEvent } from "axios";
 
 import progressStore from "../store/progressStore";
+import _ from "lodash";
 
 export const getDirectoryContents = async (
   path: string,
@@ -51,3 +52,16 @@ export const getFileDownloadUrl = (file: IFile, server: IServerFormData) => {
   return axios.get(`/book/download?${queryStr}`);
 };
 
+export const syncStateToWebdav = async (
+  server: IServerFormData,
+  books: Array<IBook>
+) => {
+ 
+
+  return await axios.post(
+    `/webdav/putFileContents?${queryString.stringify(server)}`,
+    {
+      books,
+    }
+  );
+};

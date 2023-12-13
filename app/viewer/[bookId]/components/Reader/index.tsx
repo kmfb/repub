@@ -8,29 +8,39 @@ import useBooksContent from "@/app/store/useBooksContent";
 import useIndexStore from "@/app/store";
 import { repubCache } from "@/app/utils/cache";
 import useCachedBookContent from "@/app/hook/useCachedBookContent";
+import { ReactReader } from "react-reader";
+import useHookLocationChanged from "../ReaderContainer/hooks/useHookLocationChanged";
+import useReader from "../../store";
 
-interface Props {}
-
-function Reader({}: Props) {
+function Reader() {
   const params = useParams();
   const { books } = useBooksContent();
   const { books: booksPagination } = useIndexStore();
   const memoryBook: any = books.find((book) => book.id === params.bookId);
   const pBook: any = booksPagination.find((book) => book.id === params.bookId);
   const cachedBook = useCachedBookContent(params.bookId as any);
+  const locationChanged = useHookLocationChanged();
+  const { setRendition } = useReader();
 
-  const rendition = useRendition({
-    book: cachedBook ? cachedBook : memoryBook,
-    nodeId: "area",
-    location: pBook?.location,
-  });
+  // const rendition = useRendition({
+  //   book: cachedBook ? cachedBook : memoryBook,
+  //   nodeId: "area",
+  //   location: pBook?.location,
+  // });
+
+  const book = cachedBook ? cachedBook : memoryBook;
+  const content = book?.content;
 
   return (
-    <div>
-      <div
-        id="area"
-        className="box-border mx-auto w-full h-full overflow-y-hidden"
-      ></div>
+    <div style={{ height: "100vh" }}>
+      <ReactReader
+        url={content}
+        location={pBook?.location}
+        locationChanged={(epubcfi: string) => locationChanged(epubcfi as any)}
+        getRendition={(r: any) => {
+          setRendition(r);
+        }}
+      />
     </div>
   );
 }

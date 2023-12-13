@@ -6,6 +6,12 @@ function useHookClick() {
   useEffect(() => {
     if (!rendition) return;
     const handleClick = (event: any) => {
+      const selection = event.view.document.getSelection();
+      const str = selection.toString();
+      if (selection && str) {
+        // selection exists and has content
+        return;
+      }
       const width = event.view.document.body.clientWidth;
       const offsetX = event.clientX % width;
 

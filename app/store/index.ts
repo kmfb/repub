@@ -70,22 +70,22 @@ const useIndexStore = create<IndexState & IndexActions>()(
     {
       name: "index-storage", // name of the item in the storage (must be unique)
       partialize: (state) => {
-        const syncStateToWebdav = async () => {
-          const currentServer = state.currentServer;
-          if (_.isEmpty(currentServer)) {
-            return;
-          }
-          const isEmptyLocal = _.isEmpty(state.books);
-          if (isEmptyLocal) {
-            return;
-          }
+        // const syncStateToWebdav = async () => {
+        //   const currentServer = state.currentServer;
+        //   if (_.isEmpty(currentServer)) {
+        //     return;
+        //   }
+        //   const isEmptyLocal = _.isEmpty(state.books);
+        //   if (isEmptyLocal) {
+        //     return;
+        //   }
 
-          const res = await axios.post(
-            `/webdav/putFileContents?${queryString.stringify(currentServer)}`,
-            _.pick(state, ["books", "currentServer"])
-          );
-        };
-        syncStateToWebdav();
+        //   const res = await axios.post(
+        //     `/webdav/putFileContents?${queryString.stringify(currentServer)}`,
+        //     _.pick(state, ["books", "currentServer"])
+        //   );
+        // };
+        // syncStateToWebdav();
         return state;
       },
     }

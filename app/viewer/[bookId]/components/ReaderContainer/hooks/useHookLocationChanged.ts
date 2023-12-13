@@ -3,37 +3,27 @@ import { useParams } from "next/navigation";
 import useReader from "../../../store";
 import { useCallback, useEffect } from "react";
 import { ILocation } from "../../../types";
+import { syncStateToWebdav } from "@/app/clientApi";
 
 function useHookLocationChanged() {
-  const { books, setBooks } = useIndexStore();
+  const { books, setBooks, currentServer } = useIndexStore();
+
   const params = useParams();
-  const { rendition } = useReader();
 
-  const locationChanged = useCallback(
-    (location: ILocation) => {
-   
-      const booksWithLocation = books.map((book) => {
-        if (book.id === params.bookId) {
-          return {
-            ...book,
-            location,
-          };
-        }
-        return book;
-      });
-      setBooks(booksWithLocation);
-    },
-    [rendition]
-  );
+  const locationChanged = (location: string) => {
+    const booksWithLocation = books.map((book) => {
+      if (book.id === params.bookId) {
+        return {
+          ...book,
+          location,
+        };
+      }
+      return book;
+    });
+    setBooks(booksWithLocation);
+    syncStateToWebdav(currentServer, booksWithLocation);
+  };
 
-  useEffect(() => {
-    if (!rendition) {
-      return () => {};
-    }
-    rendition.on("locationChanged", locationChanged);
-    return () => {
-      rendition.off("locationChanged", locationChanged);
-    };
-  }, [rendition, locationChanged]);
+  return locationChanged;
 }
 export default useHookLocationChanged;

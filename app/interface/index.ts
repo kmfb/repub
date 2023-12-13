@@ -14,7 +14,7 @@ export interface IServerFormData {
 export interface IBook {
   id: string;
   name: string;
-  location?: ILocation;
+  location?: string;
   serverId: string;
   content: any;
 }
