@@ -40,6 +40,9 @@ function Reader() {
         getRendition={(r: any) => {
           setRendition(r);
         }}
+        epubOptions={{
+          allowScriptedContent: true,
+        }}
       />
     </div>
   );
