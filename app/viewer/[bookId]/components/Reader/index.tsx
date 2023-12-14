@@ -8,7 +8,7 @@ import useBooksContent from "@/app/store/useBooksContent";
 import useIndexStore from "@/app/store";
 import { repubCache } from "@/app/utils/cache";
 import useCachedBookContent from "@/app/hook/useCachedBookContent";
-import { ReactReader } from "react-reader";
+import { ReactReader, ReactReaderStyle } from "react-reader";
 import useHookLocationChanged from "../ReaderContainer/hooks/useHookLocationChanged";
 import useReader from "../../store";
 
@@ -39,6 +39,12 @@ function Reader() {
         locationChanged={(epubcfi: string) => locationChanged(epubcfi as any)}
         getRendition={(r: any) => {
           setRendition(r);
+        }}
+        readerStyles={{
+          ...ReactReaderStyle,
+          arrow: {
+            display: "none",
+          },
         }}
         epubOptions={{
           allowScriptedContent: true,
